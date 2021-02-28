@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 
 namespace EBanking.Logic
 {
     public class User
     {
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-
-        private string _password;
-        private List<Account> _accounts;
+        private readonly List<Account> _accounts;
         private Account _curAccount;
+
+        private readonly string _password;
 
         public User()
         {
@@ -20,13 +16,14 @@ namespace EBanking.Logic
             Name = "Invalid user";
             Console.WriteLine($"{GetType().Name} default ctor called");
         }
+
         public User(int id, string name, string surname, string password)
         {
             Id = id;
             Name = name;
             Surname = surname;
             _password = password;
-            
+
             Console.WriteLine($"{GetType().Name} initializer ctor called");
         }
 
@@ -37,9 +34,13 @@ namespace EBanking.Logic
             Surname = usr.Surname;
             _password = usr._password;
             _accounts = usr._accounts;
-            
+
             Console.WriteLine($"{GetType().Name} copy ctor called");
         }
+
+        public int Id { get; }
+        public string Name { get; }
+        public string Surname { get; }
 
         public bool CheckPass(string pass)
         {

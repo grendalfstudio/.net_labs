@@ -1,9 +1,8 @@
 ﻿using System;
-using EBanking.Logic;
 
 namespace EBanking
 {
-    static class Program
+    internal static class Program
     {
         private static void Main(string[] args)
         {
@@ -16,9 +15,9 @@ namespace EBanking
                                "=Юхимчук Анастасiя IТ-8128      =\n" +
                                "=================================\n";
             Console.WriteLine(str);
-            
+
             CtorsTest.Test();
-            
+
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
         }
