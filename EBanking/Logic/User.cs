@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EBanking.Logic
 {
     public class User
     {
         private readonly List<Account> _accounts;
-        private Account _curAccount;
+        private Account _currAccount;
 
-        private readonly string _password;
+        private string _password;
 
         public User()
         {
@@ -45,6 +46,23 @@ namespace EBanking.Logic
         public bool CheckPass(string pass)
         {
             return _password.Equals(pass);
+        }
+
+        public bool DoOperation(IOperation operation)
+        {
+            return operation.Execute(_currAccount);
+        }
+
+        public bool SelectAccount(Guid accNumber)
+        {
+            if (!_accounts.Exists(a => a.AccountNumber == accNumber)) return false;
+            _currAccount = _accounts.Find(a => a.AccountNumber == accNumber);
+            return true;
+        }
+
+        public string CheckAccounts()
+        {
+            return _accounts.Aggregate("", (current, account) => current + (account.AccountNumber + "\n"));
         }
     }
 }

@@ -30,10 +30,5 @@ namespace EBanking.Logic
         public Guid AccountNumber { get; }
         public decimal Balance { get; set; }
         public string Currency { get; }
-
-        public bool DoOperation(IOperation operation)
-        {
-            return operation.Execute(this);
-        }
     }
 }

@@ -6,7 +6,8 @@ namespace EBanking.Logic
     {
         public bool Execute(Account acc)
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Account {acc.AccountNumber} balance: {acc.Balance}");
+            return true;
         }
     }
 }
