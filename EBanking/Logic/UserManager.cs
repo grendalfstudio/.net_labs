@@ -5,7 +5,7 @@ namespace EBanking.Logic
 {
     public static class UserManager
     {
-        private static readonly List<User> _users = new();
+        private static List<User> _users = new();
         private static User _currentUser = new();
         private static int _lastId;
 

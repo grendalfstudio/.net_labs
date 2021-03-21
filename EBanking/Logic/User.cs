@@ -6,7 +6,7 @@ namespace EBanking.Logic
 {
     public class User
     {
-        private readonly List<Account> _accounts;
+        private List<Account> _accounts;
         private Account _currAccount;
 
         private string _password;
