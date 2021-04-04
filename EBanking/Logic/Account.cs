@@ -1,11 +1,27 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Diagnostics;
 
 namespace EBanking.Logic
 {
     public class Account
     {
+        private bool Equals(Account other)
+        {
+            return Balance == other.Balance && Currency == other.Currency;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Account) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Balance, Currency);
+        }
+
         public Account()
         {
             AccountNumber = Guid.NewGuid();
