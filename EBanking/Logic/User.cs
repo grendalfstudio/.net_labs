@@ -43,9 +43,16 @@ namespace EBanking.Logic
         public string Name { get; }
         public string Surname { get; }
 
+        public Guid CurrentAccountNumber { get; set; }
+
         public bool CheckPass(string pass)
         {
             return _password.Equals(pass);
+        }
+
+        public void AddAccount(string currency)
+        {
+            _accounts.Add(new Account(Guid.NewGuid(), currency));
         }
 
         public bool DoOperation(IOperation operation)
@@ -60,9 +67,26 @@ namespace EBanking.Logic
             return true;
         }
 
+        public void RemoveAccount(Guid accNumber)
+        {
+            var acc = _accounts.FirstOrDefault(a => a.AccountNumber.Equals(accNumber));
+            if (acc is null) return;
+            if (_currAccount == acc)
+            {
+                _currAccount = null;
+            }
+            _accounts.Remove(acc);
+        }
+
         public string CheckAccounts()
         {
             return _accounts.Aggregate("", (current, account) => current + (account.AccountNumber + "\n"));
+        }
+
+        public static User operator !(User usr)
+        {
+            usr.RemoveAccount(usr.CurrentAccountNumber);
+            return usr;
         }
     }
 }
