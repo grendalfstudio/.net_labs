@@ -6,7 +6,7 @@ namespace EBanking.Logic
 {
     public class User
     {
-        private List<Account> _accounts;
+        private List<Account> _accounts = new List<Account>();
         private Account _currAccount;
 
         private string _password;
@@ -53,6 +53,15 @@ namespace EBanking.Logic
         public void AddAccount(string currency)
         {
             _accounts.Add(new Account(Guid.NewGuid(), currency));
+            _currAccount = _accounts.Last();
+            CurrentAccountNumber = _currAccount.AccountNumber;
+        }
+        
+        public void AddAccount(Account acc)
+        {
+            _accounts.Add(acc);
+            _currAccount = acc;
+            CurrentAccountNumber = _currAccount.AccountNumber;
         }
 
         public bool DoOperation(IOperation operation)
@@ -64,6 +73,7 @@ namespace EBanking.Logic
         {
             if (!_accounts.Exists(a => a.AccountNumber == accNumber)) return false;
             _currAccount = _accounts.Find(a => a.AccountNumber == accNumber);
+            CurrentAccountNumber = _currAccount.AccountNumber;
             return true;
         }
 

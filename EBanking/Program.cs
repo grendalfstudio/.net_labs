@@ -1,4 +1,5 @@
 ﻿using System;
+using EBanking.Logic;
 
 namespace EBanking
 {
@@ -16,7 +17,11 @@ namespace EBanking
                                "=================================\n";
             Console.WriteLine(str);
 
-            CtorsTest.Test();
+            var opTest = new OperatorsTest();
+
+            //CtorsTest.Test();
+            
+            opTest.Run();
 
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
