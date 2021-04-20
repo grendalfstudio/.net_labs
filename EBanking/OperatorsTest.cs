@@ -7,14 +7,14 @@ namespace EBanking.Logic
 
         public OperatorsTest()
         {
-            FirstAccount = new(Guid.NewGuid(), "UAH");
-            SecondAccount = new(Guid.NewGuid(), "UAH");
+            FirstAccount = new(Guid.NewGuid().ToString(), "UAH");
+            SecondAccount = new(Guid.NewGuid().ToString(), "UAH");
 
-            User = new();
+            User = new User();
         }
 
-        public Account FirstAccount { get; set; }
-        public Account SecondAccount { get; set; }
+        public Account<string> FirstAccount { get; set; }
+        public Account<string> SecondAccount { get; set; }
         public User User { get; set; }
 
         public void Run()
@@ -29,7 +29,7 @@ namespace EBanking.Logic
             Console.WriteLine(User.CheckAccounts());
             User = !User;
             Console.WriteLine("Аккаунти після виклику оператора:");
-            Console.WriteLine(User.CheckAccounts());
+            Console.WriteLine((User as User).CheckAccounts());
             
             Console.WriteLine("\n#### Оператор '++' ####");
             Console.WriteLine("Баланс до виклику оператора:");
@@ -51,6 +51,7 @@ namespace EBanking.Logic
             Console.WriteLine(SecondAccount.Balance);
             Console.WriteLine("Виклик оператора [FirstAccount > SecondAccount]:");
             Console.WriteLine(FirstAccount > SecondAccount);
+            System.Console.WriteLine();
 
         }
     }

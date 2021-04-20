@@ -4,80 +4,48 @@ using System.Linq;
 
 namespace EBanking.Logic
 {
-    public class User
+    public class User : AbstractUser<string>
     {
-        private List<Account> _accounts = new List<Account>();
-        private Account _currAccount;
-
-        private string _password;
-
         public User()
         {
-            Id = -1;
-            Name = "Invalid user";
-            Console.WriteLine($"{GetType().Name} default ctor called");
         }
 
-        public User(int id, string name, string surname, string password)
+        public User(int id, string name, string surname, string password) : base(id, name, surname, password)
         {
-            Id = id;
-            Name = name;
-            Surname = surname;
-            _password = password;
-
-            Console.WriteLine($"{GetType().Name} initializer ctor called");
         }
 
-        public User(User usr)
+        public User(AbstractUser<string> usr) : base(usr)
         {
-            Id = usr.Id;
-            Name = usr.Name;
-            Surname = usr.Surname;
-            _password = usr._password;
-            _accounts = usr._accounts;
-
-            Console.WriteLine($"{GetType().Name} copy ctor called");
         }
 
-        public int Id { get; }
-        public string Name { get; }
-        public string Surname { get; }
-
-        public Guid CurrentAccountNumber { get; set; }
-
-        public bool CheckPass(string pass)
+        public override bool CheckPass(string pass)
         {
             return _password.Equals(pass);
         }
 
-        public void AddAccount(string currency)
+        public override void AddAccount(string currency)
         {
-            _accounts.Add(new Account(Guid.NewGuid(), currency));
+            _accounts.Add(new Account<string>((string)(Guid.NewGuid().ToString() as object), currency));
             _currAccount = _accounts.Last();
             CurrentAccountNumber = _currAccount.AccountNumber;
         }
         
-        public void AddAccount(Account acc)
+        public override void AddAccount(Account<string> acc)
         {
             _accounts.Add(acc);
             _currAccount = acc;
             CurrentAccountNumber = _currAccount.AccountNumber;
         }
 
-        public bool DoOperation(IOperation operation)
+        public bool SelectAccount(string accNumber)
         {
-            return operation.Execute(_currAccount);
-        }
-
-        public bool SelectAccount(Guid accNumber)
-        {
-            if (!_accounts.Exists(a => a.AccountNumber == accNumber)) return false;
-            _currAccount = _accounts.Find(a => a.AccountNumber == accNumber);
+            if (!_accounts.Exists(a => a.AccountNumber.Equals( accNumber))) return false;
+            _currAccount = _accounts.Find(a => a.AccountNumber.Equals(accNumber));
             CurrentAccountNumber = _currAccount.AccountNumber;
             return true;
         }
 
-        public void RemoveAccount(Guid accNumber)
+        public void RemoveAccount(string accNumber)
         {
             var acc = _accounts.FirstOrDefault(a => a.AccountNumber.Equals(accNumber));
             if (acc is null) return;
