@@ -2,18 +2,18 @@
 
 namespace EBanking.Logic
 {
-    public class TransferMoneyOperation : IOperation
+    public class TransferMoneyOperation : IOperation<string>
     {
         private decimal _sum;
-        private Account _destination;
+        private Account<string> _destination;
 
-        public TransferMoneyOperation(decimal sum, Account destination)
+        public TransferMoneyOperation(decimal sum, Account<string> destination)
         {
             _sum = sum;
             _destination = destination;
         }
 
-        public bool Execute(Account acc)
+        public bool Execute(Account<string> acc)
         {
             if (!((acc.Balance - _sum) >= 0) || _sum < 0) return false;
             acc.Balance -= _sum;

@@ -1,7 +1,9 @@
-﻿namespace EBanking.Logic
+﻿using System;
+
+namespace EBanking.Logic
 {
-    public interface IOperation
+    public interface IOperation<TAccountId> where TAccountId : IEquatable<TAccountId>
     {
-        public bool Execute(Account acc);
+        public bool Execute(Account<TAccountId> acc);
     }
 }
