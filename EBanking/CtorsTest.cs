@@ -14,6 +14,9 @@ namespace EBanking
             User usr1 = new();
             UserManager.CreateUser("Name", "SName", "sspass");
             User usr2 = new(usr1);
+
+            usr1.AddAccount("UAH");
+            usr1 = !usr1;
         }
     }
 }

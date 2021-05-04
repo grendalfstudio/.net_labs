@@ -14,7 +14,6 @@ namespace EBanking.Logic
         {
             Id = -1;
             Name = "Invalid user";
-            Console.WriteLine($"{GetType().Name} default ctor called");
         }
 
         public AbstractUser(int id, string name, string surname, string password)
@@ -24,7 +23,6 @@ namespace EBanking.Logic
             Surname = surname;
             _password = password;
 
-            Console.WriteLine($"{GetType().Name} initializer ctor called");
         }
 
         public AbstractUser(AbstractUser<TAccountId> usr)
@@ -35,7 +33,7 @@ namespace EBanking.Logic
             _password = usr._password;
             _accounts = usr._accounts;
 
-            Console.WriteLine($"{GetType().Name} copy ctor called");
+
         }
 
         public int Id { get; }
@@ -49,6 +47,6 @@ namespace EBanking.Logic
         public abstract void AddAccount(string currency);
 
         public abstract void AddAccount(Account<TAccountId> acc);
-        
+
     }
 }

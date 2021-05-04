@@ -24,15 +24,12 @@ namespace EBanking.Logic
         public Account()
         {
             AccountNumber = (TId)(Guid.NewGuid().ToString() as object);
-            Console.WriteLine($"{GetType().Name} default ctor called");
         }
 
         public Account(TId accountNumber, string currency)
         {
             AccountNumber = accountNumber;
             Currency = currency;
-
-            Console.WriteLine($"{GetType().Name} initializer ctor called");
         }
 
         public Account(Account<TId> acc)
@@ -40,8 +37,6 @@ namespace EBanking.Logic
             Balance = acc.Balance;
             Currency = acc.Currency;
             AccountNumber = acc.AccountNumber;
-
-            Console.WriteLine($"{GetType().Name} copy ctor called");
         }
 
         public Account(TId accountNumber, decimal balance, string currency)

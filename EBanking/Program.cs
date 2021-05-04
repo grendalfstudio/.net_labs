@@ -19,17 +19,17 @@ namespace EBanking
 
             var opTest = new OperatorsTest();
 
-            //CtorsTest.Test();
-            
-            opTest.Run();
+            CtorsTest.Test();
 
-            User user = new SampleUser();
-            SampleUser newUser = (SampleUser)user;
-            System.Console.WriteLine("Downcasting done");
+            //opTest.Run();
 
-            SampleUser user2 = new SampleUser();
-            User newUser2 = user2;
-            System.Console.WriteLine("Upcasting done");
+            //User user = new SampleUser();
+            // SampleUser newUser = (SampleUser)user;
+            // System.Console.WriteLine("Downcasting done");
+
+            // SampleUser user2 = new SampleUser();
+            // User newUser2 = user2;
+            // System.Console.WriteLine("Upcasting done");
 
             Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
