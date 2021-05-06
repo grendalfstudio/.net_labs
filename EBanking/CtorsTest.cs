@@ -17,6 +17,24 @@ namespace EBanking
 
             usr1.AddAccount("UAH");
             usr1 = !usr1;
+
+            try
+            {
+                UserManager.CreateUser("", "", "");
+            }
+            catch (RegistrationException regEx)
+            {
+                Console.WriteLine(regEx.Message);
+            }
+
+            try
+            {
+                UserManager.AuthenticateUser(00, "a");
+            }
+            catch (AuthenticationException authEx)
+            {
+                Console.WriteLine(authEx.Message);
+            }
         }
     }
 }

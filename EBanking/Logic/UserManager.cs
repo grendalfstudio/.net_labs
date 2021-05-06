@@ -11,15 +11,19 @@ namespace EBanking.Logic
 
         public static int CreateUser(string name, string sName, string pass)
         {
+            if ((name is null or "") || (sName is null or "") || (pass is null or ""))
+            {
+                throw new RegistrationException("Invalid input");
+            }
             User usr = new(_lastId++, name, sName, pass);
             _users.Add(usr);
             return usr.Id;
         }
 
-        public static bool AuthorizeUser(int id, string pass)
+        public static bool AuthenticateUser(int id, string pass)
         {
             if (!_users.Exists(u => u.Id == id) || !_users.First(u => u.Id == id).CheckPass(pass))
-                return false;
+                throw new AuthenticationException("Invalid login/password");
             _currentUser = _users.First(u => u.Id == id);
             return true;
         }
