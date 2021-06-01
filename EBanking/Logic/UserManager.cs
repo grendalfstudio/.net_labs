@@ -11,7 +11,7 @@ namespace EBanking.Logic
 
         public static int CreateUser(string name, string sName, string pass)
         {
-            if ((name is null or "") || (sName is null or "") || (pass is null or ""))
+            if (name is null or "" || sName is null or "" || pass is null or "")
             {
                 throw new RegistrationException("Invalid input");
             }

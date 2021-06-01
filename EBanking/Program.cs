@@ -1,5 +1,4 @@
 ﻿using System;
-using EBanking.Logic;
 
 namespace EBanking
 {

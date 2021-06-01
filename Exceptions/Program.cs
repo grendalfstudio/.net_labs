@@ -20,7 +20,7 @@ namespace Exceptions
             {
                 Console.WriteLine(e.Message);
             }
-            
+
             ArraysOperations thirdArrays = null;
             try
             {
@@ -28,7 +28,7 @@ namespace Exceptions
             }
             catch (NullReferenceException e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
             }
 
             try
@@ -39,7 +39,7 @@ namespace Exceptions
             {
                 Console.WriteLine(argumentException.Message);
             }
-            
+
             try
             {
                 var testArrays = new ArraysOperations(-3, 10);
